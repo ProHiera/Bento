@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 - Bento</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <nav class="nav">
+        <div class="container">
+          <a href="index.html" class="logo">
+            <img
+              src="SlimBentoLogo.png"
+              width="40"
+              height="40"
+              alt="Bento 로고"
+            />
+            Bento
+          </a>
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">홈</a></li>
+            <li><a href="index.html#menu" class="nav-link">메뉴</a></li>
+            <li><a href="index.html#builder" class="nav-link">커스텀</a></li>
+            <li>
+              <a href="cart.html" class="nav-link"
+                >🛒 장바구니 <span class="cart-count">0</span></a
+              >
+            </li>
+          </ul>
+          <div class="user-menu">
+            <a href="login.html" class="nav-link active" id="login-link"
+              >로그인</a
+            >
+            <a
+              href="mypage.html"
+              class="nav-link"
+              id="mypage-link"
+              style="display: none"
+              >마이페이지</a
+            >
+            <button id="logout-btn" class="logout-btn" style="display: none">
+              로그아웃
+            </button>
+          </div>
+          <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="auth-container">
+          <div class="auth-card">
+            <div class="auth-header">
+              <h1>로그인</h1>
+              <p>Bento에서 맛있는 도시락을 주문하세요</p>
+            </div>
+
+            <!-- 로그인 폼 -->
+            <form id="login-form" class="auth-form">
+              <div class="form-group">
+                <label for="email">이메일</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="이메일을 입력하세요"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  placeholder="비밀번호를 입력하세요"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                로그인
+              </button>
+            </form>
+
+            <!-- 회원가입 링크 -->
+            <div class="auth-links">
+              <p>
+                아직 회원이 아니신가요?
+                <a href="#" id="show-register">회원가입</a>
+              </p>
+            </div>
+
+            <!-- 테스트 계정 안내 -->
+            <div class="test-account-info">
+              <h4>테스트 계정</h4>
+              <p><strong>이메일:</strong> test@bento.com</p>
+              <p><strong>비밀번호:</strong> test123</p>
+              <button
+                type="button"
+                id="fill-test-account"
+                class="btn btn-secondary"
+              >
+                테스트 계정으로 로그인
+              </button>
+            </div>
+          </div>
+
+          <!-- 회원가입 폼 (숨김) -->
+          <div class="auth-card" id="register-card" style="display: none">
+            <div class="auth-header">
+              <h1>회원가입</h1>
+              <p>Bento에 가입하고 특별한 혜택을 받아보세요</p>
+            </div>
+
+            <form id="register-form" class="auth-form">
+              <div class="form-group">
+                <label for="reg-name">이름</label>
+                <input
+                  type="text"
+                  id="reg-name"
+                  name="name"
+                  required
+                  placeholder="이름을 입력하세요"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-email">이메일</label>
+                <input
+                  type="email"
+                  id="reg-email"
+                  name="email"
+                  required
+                  placeholder="이메일을 입력하세요"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-password">비밀번호</label>
+                <input
+                  type="password"
+                  id="reg-password"
+                  name="password"
+                  required
+                  placeholder="비밀번호 (6자 이상)"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-password-confirm">비밀번호 확인</label>
+                <input
+                  type="password"
+                  id="reg-password-confirm"
+                  name="passwordConfirm"
+                  required
+                  placeholder="비밀번호를 다시 입력하세요"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-phone">전화번호</label>
+                <input
+                  type="tel"
+                  id="reg-phone"
+                  name="phone"
+                  required
+                  placeholder="전화번호를 입력하세요"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-address">주소</label>
+                <input
+                  type="text"
+                  id="reg-address"
+                  name="address"
+                  placeholder="주소를 입력하세요 (선택사항)"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                회원가입
+              </button>
+            </form>
+
+            <div class="auth-links">
+              <p>이미 회원이신가요? <a href="#" id="show-login">로그인</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3>Bento</h3>
+            <p>건강한 도시락, 맞춤 주문</p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="index.html#menu">메뉴</a>
+            <a href="index.html#builder">커스텀</a>
+            <a href="cart.html">장바구니</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Bento. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/auth.js"></script>
+    <script>
+      // 로그인 폼 처리
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          const result = window.authManager.login(email, password);
+
+          if (result.success) {
+            alert(`환영합니다, ${result.user.name}님!`);
+            window.location.href = "index.html";
+          } else {
+            alert(result.message);
+          }
+        });
+
+      // 회원가입 폼 처리
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(e.target);
+          const userData = Object.fromEntries(formData);
+
+          // 비밀번호 확인
+          if (userData.password !== userData.passwordConfirm) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+          }
+
+          if (userData.password.length < 6) {
+            alert("비밀번호는 6자 이상이어야 합니다.");
+            return;
+          }
+
+          delete userData.passwordConfirm;
+
+          const result = window.authManager.register(userData);
+
+          if (result.success) {
+            alert(result.message + " 로그인해주세요.");
+            showLoginForm();
+          } else {
+            alert(result.message);
+          }
+        });
+
+      // 폼 전환
+      function showRegisterForm() {
+        document.querySelector(".auth-card:first-child").style.display = "none";
+        document.getElementById("register-card").style.display = "block";
+      }
+
+      function showLoginForm() {
+        document.querySelector(".auth-card:first-child").style.display =
+          "block";
+        document.getElementById("register-card").style.display = "none";
+      }
+
+      // 이벤트 리스너
+      document
+        .getElementById("show-register")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          showRegisterForm();
+        });
+
+      document
+        .getElementById("show-login")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          showLoginForm();
+        });
+
+      // 테스트 계정 자동 입력
+      document
+        .getElementById("fill-test-account")
+        .addEventListener("click", function () {
+          document.getElementById("email").value = "test@bento.com";
+          document.getElementById("password").value = "test123";
+        });
+
+      // 페이지 로드 시 테스트 계정 생성
+      document.addEventListener("DOMContentLoaded", function () {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const testUser = users.find((u) => u.email === "test@bento.com");
+
+        if (!testUser) {
+          users.push({
+            id: "test-user",
+            name: "테스트 사용자",
+            email: "test@bento.com",
+            password: "test123",
+            phone: "010-1234-5678",
+            address: "서울시 강남구 테스트동 123-45",
+            joinDate: new Date().toISOString(),
+          });
+          localStorage.setItem("users", JSON.stringify(users));
+        }
+      });
+    </script>
+  </body>
+</html>

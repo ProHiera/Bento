@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 - Bento</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="SlimBentoLogo.png" width="40" height="40" alt="Bento 로고">
+                    Bento
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">홈</a></li>
+                    <li><a href="index.html#menu" class="nav-link">메뉴</a></li>
+                    <li><a href="index.html#builder" class="nav-link">커스텀</a></li>
+                    <li><a href="cart.html" class="nav-link">🛒 장바구니 <span class="cart-count">0</span></a></li>
+                </ul>
+                <div class="user-menu">
+                    <a href="login.html" class="nav-link" id="login-link" style="display: none;">로그인</a>
+                    <a href="mypage.html" class="nav-link active" id="mypage-link">마이페이지</a>
+                    <button id="logout-btn" class="logout-btn">로그아웃</button>
+                </div>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="mypage-container">
+                <!-- 사용자 정보 카드 -->
+                <div class="user-info-card">
+                    <div class="user-avatar">
+                        <div class="avatar-icon">👤</div>
+                    </div>
+                    <div class="user-details">
+                        <h2 id="user-name">사용자님</h2>
+                        <p id="user-email">user@example.com</p>
+                        <p id="user-phone">010-0000-0000</p>
+                        <button class="btn btn-secondary" id="edit-profile-btn">
+                            프로필 수정
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 탭 메뉴 -->
+                <div class="mypage-tabs">
+                    <button class="tab-btn active" data-tab="orders">주문 내역</button>
+                    <button class="tab-btn" data-tab="profile">프로필 설정</button>
+                </div>
+
+                <!-- 주문 내역 탭 -->
+                <div class="tab-content active" id="orders-tab">
+                    <div class="orders-section">
+                        <h3>📦 주문 내역</h3>
+                        <div id="orders-list">
+                            <div class="empty-orders">
+                                <div class="empty-icon">📦</div>
+                                <h4>주문 내역이 없습니다</h4>
+                                <p>맛있는 도시락을 주문해보세요!</p>
+                                <a href="index.html#builder" class="btn btn-primary">
+                                    도시락 주문하기
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 프로필 설정 탭 -->
+                <div class="tab-content" id="profile-tab">
+                    <div class="profile-section">
+                        <h3>⚙️ 프로필 설정</h3>
+                        <form id="profile-form" class="profile-form">
+                            <div class="form-group">
+                                <label for="profile-name">이름</label>
+                                <input type="text" id="profile-name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-email">이메일</label>
+                                <input type="email" id="profile-email" name="email" required readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-phone">전화번호</label>
+                                <input type="tel" id="profile-phone" name="phone" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-address">주소</label>
+                                <input type="text" id="profile-address" name="address">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                프로필 업데이트
+                            </button>
+                        </form>
+
+                        <!-- 비밀번호 변경 -->
+                        <div class="password-change-section">
+                            <h4>비밀번호 변경</h4>
+                            <form id="password-form">
+                                <div class="form-group">
+                                    <label for="current-password">현재 비밀번호</label>
+                                    <input type="password" id="current-password" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="new-password">새 비밀번호</label>
+                                    <input type="password" id="new-password" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirm-password">새 비밀번호 확인</label>
+                                    <input type="password" id="confirm-password" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-secondary">
+                                    비밀번호 변경
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Bento</h3>
+                    <p>건강한 도시락, 맞춤 주문</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">홈</a>
+                    <a href="index.html#menu">메뉴</a>
+                    <a href="index.html#builder">커스텀</a>
+                    <a href="cart.html">장바구니</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bento. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/cart.js"></script>
+</body>
+</html>

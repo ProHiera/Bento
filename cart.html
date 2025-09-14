@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니 - Bento</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header">
+      <nav class="nav">
+        <div class="container">
+          <a href="index.html" class="logo">
+            <img
+              src="SlimBentoLogo.png"
+              width="40"
+              height="40"
+              alt="Bento 로고"
+            />
+            Bento
+          </a>
+          <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">홈</a></li>
+            <li><a href="index.html#menu" class="nav-link">메뉴</a></li>
+            <li>
+              <a href="index.html#builder" class="nav-link">커스텀</a>
+            </li>
+            <li><a href="cart.html" class="nav-link active">🛒 장바구니</a></li>
+          </ul>
+          <div class="user-menu">
+            <a href="login.html" class="nav-link" id="login-link">로그인</a>
+            <a
+              href="mypage.html"
+              class="nav-link"
+              id="mypage-link"
+              style="display: none"
+              >마이페이지</a
+            >
+            <button id="logout-btn" class="logout-btn" style="display: none">
+              로그아웃
+            </button>
+          </div>
+          <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 장바구니 메인 컨텐츠 -->
+    <main class="main-content">
+      <div class="container">
+        <div class="page-header">
+          <h1>🛒 장바구니</h1>
+          <p>선택하신 도시락을 확인하고 주문해보세요</p>
+        </div>
+
+        <div class="cart-container">
+          <!-- 장바구니 아이템들 -->
+          <div class="cart-items-section">
+            <div class="cart-items" id="cart-items">
+              <!-- 장바구니가 비어있을 때 -->
+              <div class="empty-cart" id="empty-cart">
+                <div class="empty-icon">🛒</div>
+                <h3>장바구니가 비어있습니다</h3>
+                <p>맛있는 도시락을 담아보세요!</p>
+                <a href="index.html#builder" class="btn btn-primary"
+                  >도시락 만들기</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 주문 요약 -->
+          <div class="cart-summary" id="cart-summary" style="display: none">
+            <div class="summary-card">
+              <h3>주문 요약</h3>
+              <div class="summary-details">
+                <div class="summary-row">
+                  <span>상품 금액</span>
+                  <span id="cart-subtotal">0원</span>
+                </div>
+                <div class="summary-row">
+                  <span>배송비</span>
+                  <span id="cart-delivery">3,000원</span>
+                </div>
+                <div class="summary-row total">
+                  <span>총 결제 금액</span>
+                  <span id="cart-total">0원</span>
+                </div>
+              </div>
+              <button class="btn btn-primary order-btn" id="proceed-order">
+                주문하기
+              </button>
+              <div class="delivery-info">
+                <p>📦 20,000원 이상 주문시 배송비 무료</p>
+                <p>🚚 평균 배송시간: 30-60분</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3>Bento</h3>
+            <p>건강한 도시락, 맞춤 주문</p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html">홈</a>
+            <a href="index.html#menu">메뉴</a>
+            <a href="index.html#builder">커스텀</a>
+            <a href="cart.html">장바구니</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Bento. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/auth.js"></script>
+  </body>
+</html>

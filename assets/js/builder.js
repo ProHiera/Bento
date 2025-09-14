@@ -244,17 +244,19 @@ class CustomBuilder {
       id: `custom-${Date.now()}`,
       name: "커스텀 도시락",
       description: this.generateDescription(),
-      ingredients: [...this.selectedIngredients],
+      ingredients: this.selectedIngredients.map((ing) => ing.name),
       nutrition,
       price: totalPrice,
       isCustom: true,
+      image: "assets/images/custom-bento.jpg",
     };
 
-    // Add to cart via main app
-    if (window.app) {
-      window.app.addToCart(customBento);
-      this.showMessage("커스텀 도시락이 장바구니에 추가되었습니다!");
+    // Add to cart using global function
+    if (typeof addToCart === "function") {
+      addToCart(customBento);
       this.clearBuild();
+    } else {
+      this.showMessage("장바구니 기능을 로드할 수 없습니다.", "error");
     }
   }
 

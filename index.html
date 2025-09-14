@@ -1,1060 +1,170 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LeanBento - 맞춤형 다이어트 도시락</title>
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/components.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-    />
-  </head>
-  <body>
-    <!-- GNB (replaces previous .modern-navbar) -->
-    <nav class="gnb" id="site-gnb" role="navigation" aria-label="주요">
-      <div class="gnb__inner">
-        <a href="/" class="gnb__brand" aria-label="LeanBento 홈">
-          <span class="gnb__logo" aria-hidden="true">
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 32 32"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linejoin="round"
-              stroke-linecap="round"
-            >
-              <rect x="4" y="8" width="24" height="16" rx="4" />
-              <rect
-                x="8"
-                y="12"
-                width="6"
-                height="4"
-                rx="1"
-                fill="currentColor"
-              />
-              <rect
-                x="16"
-                y="12"
-                width="6"
-                height="4"
-                rx="1"
-                fill="currentColor"
-              />
-            </svg>
-          </span>
-          <span class="gnb__brand-text">LeanBento</span>
-        </a>
-        <ul class="gnb__list" id="gnbList">
-          <li class="gnb__item">
-            <a href="#home" class="gnb__link" data-section="home">홈</a>
-          </li>
-          <li class="gnb__item">
-            <a href="#menu" class="gnb__link" data-section="menu">메뉴</a>
-          </li>
-          <li class="gnb__item">
-            <a href="#builder" class="gnb__link" data-section="builder"
-              >커스텀</a
-            >
-          </li>
-          <li class="gnb__item">
-            <a
-              href="#subscription"
-              class="gnb__link"
-              data-section="subscription"
-              >구독</a
-            >
-          </li>
-          <li class="gnb__item">
-            <a href="#nutrition" class="gnb__link" data-section="nutrition"
-              >영양계산기</a
-            >
-          </li>
-          <li class="gnb__item">
-            <a href="reviews.html" class="gnb__link" data-section="reviews"
-              >후기</a
-            >
-          </li>
-          <li class="gnb__item">
-            <a href="contact.html" class="gnb__link" data-section="contact"
-              >문의</a
-            >
-          </li>
-        </ul>
-        <div class="gnb__actions">
-          <button
-            class="gnb__icon-btn"
-            id="theme-toggle"
-            aria-label="테마 변경"
-          ></button>
-          <button
-            class="gnb__icon-btn gnb__cart"
-            id="cart-btn"
-            aria-label="장바구니"
-            aria-haspopup="dialog"
-          >
-            <span class="cart-badge" id="cart-count">0</span>
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="9" cy="21" r="1" />
-              <circle cx="20" cy="21" r="1" />
-              <path
-                d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-              />
-            </svg>
-          </button>
-          <div class="profile" id="profile">
-            <button
-              class="profile__btn"
-              id="login-btn"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="profileMenu"
-            >
-              <span class="profile__avatar" aria-hidden="true">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </span>
-              <span class="profile__label">내정보</span>
-            </button>
-            <div
-              class="profile__menu"
-              id="profileMenu"
-              role="menu"
-              data-open="false"
-              hidden
-            >
-              <button
-                class="profile__item"
-                role="menuitem"
-                data-action="login"
-                id="profile-login-item"
-              >
-                로그인
-              </button>
-              <button
-                class="profile__item"
-                role="menuitem"
-                data-action="logout"
-                id="profile-logout-item"
-                hidden
-              >
-                로그아웃
-              </button>
-              <a class="profile__item" role="menuitem" href="#subscription"
-                >구독 관리</a
-              >
-            </div>
-          </div>
-        </div>
-        <button
-          class="gnb__hamburger"
-          id="hamburger"
-          aria-label="메뉴 열기"
-          aria-controls="gnbList"
-          aria-expanded="false"
-        >
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-
-      <!-- LNB Panel -->
-      <div class="lnb-panel" id="lnbPanel" aria-label="하위 메뉴" hidden>
-        <div class="lnb-group">
-          <div class="lnb-title">추천 구성</div>
-          <ul class="lnb-links">
-            <li><a href="#menu">인기 메뉴 TOP</a></li>
-            <li><a href="#builder">나만의 도시락 가이드</a></li>
-            <li><a href="#nutrition">목표칼로리 맞추기</a></li>
-          </ul>
-        </div>
-        <div class="lnb-group">
-          <div class="lnb-title">영양 & 목표</div>
-          <ul class="lnb-links">
-            <li><a href="#nutrition">BMR / TDEE 계산</a></li>
-            <li><a href="#nutrition">매크로 비율 설정</a></li>
-            <li><a href="#builder">고단백 세트 만들기</a></li>
-          </ul>
-        </div>
-        <div class="lnb-group">
-          <div class="lnb-title">구독 관리</div>
-          <ul class="lnb-links">
-            <li><a href="#subscription">주간 식단 플래너</a></li>
-            <li><a href="#subscription">배송 주기 선택</a></li>
-            <li><a href="#subscription">비용 최적화 팁</a></li>
-          </ul>
-        </div>
-        <div class="lnb-group">
-          <div class="lnb-title">도움말</div>
-          <ul class="lnb-links">
-            <li><a href="contact.html">문의하기</a></li>
-            <li><a href="reviews.html">후기 살펴보기</a></li>
-            <li><a href="#faq">자주 묻는 질문</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-background">
-        <div class="hero-slide active">
-          <img
-            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="신선한 샐러드"
-          />
-        </div>
-        <div class="hero-slide">
-          <img
-            src="https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-            alt="건강한 도시락"
-          />
-        </div>
-        <div class="hero-slide">
-          <img
-            src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="다양한 채소"
-          />
-        </div>
-        <div class="hero-overlay"></div>
-      </div>
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="hero-subtitle">
-            재료를 선택하고<br />
-            영양소를 자동 계산하는<br />
-            스마트한 식단 관리
-          </p>
-          <div class="hero-features">
-            <div class="feature-item">
-              <span>맞춤 재료 선택</span>
-            </div>
-            <div class="feature-item">
-              <span>실시간 영양소 계산</span>
-            </div>
-            <div class="feature-item">
-              <span>정기배송 서비스</span>
-            </div>
-          </div>
-          <div class="hero-cta">
-            <button class="btn btn-primary" id="start-builder">
-              지금 만들어보기
-            </button>
-            <button class="btn btn-secondary">메뉴 둘러보기</button>
-          </div>
-        </div>
-        <div class="hero-image">
-          <!-- 오늘의 추천 카드 제거됨 -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Ingredient Gather Scroll Interaction Section -->
-    <section
-      id="ingredient-gather"
-      class="ingredient-gather"
-      aria-label="재료 모션"
-    >
-      <div class="container">
-        <div class="gather-layout">
-          <div class="gather-stage" aria-hidden="true">
-            <div class="bowl" aria-hidden="true">
-              <svg
-                viewBox="0 0 400 180"
-                class="bowl-svg"
-                role="img"
-                aria-label="그릇"
-              >
-                <path
-                  d="M40 40 Q200 160 360 40 L340 20 Q200 140 60 20 Z"
-                  fill="url(#bowlGradient)"
-                  stroke="rgba(0,0,0,0.15)"
-                  stroke-width="2"
-                />
-                <defs>
-                  <linearGradient id="bowlGradient" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
-                    <stop
-                      offset="100%"
-                      stop-color="#d9e2dd"
-                      stop-opacity="0.9"
-                    />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <!-- Ingredient Pieces (remote placeholder images, replace with 로컬 자산 가능) -->
-            <img
-              class="ingredient-piece"
-              data-x="-60"
-              data-y="-30"
-              data-scale="0.9"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Lettuce_Mini_Romaine.png"
-              alt="양상추"
-              loading="lazy"
-            />
-            <img
-              class="ingredient-piece"
-              data-x="10"
-              data-y="-40"
-              data-scale="0.8"
-              src="https://upload.wikimedia.org/wikipedia/commons/8/88/Bright_red_tomato_and_cross_section02.jpg"
-              alt="토마토"
-              loading="lazy"
-            />
-            <img
-              class="ingredient-piece"
-              data-x="70"
-              data-y="-25"
-              data-scale="0.85"
-              src="https://upload.wikimedia.org/wikipedia/commons/0/01/Cucumber_Slices.jpg"
-              alt="오이"
-              loading="lazy"
-            />
-            <img
-              class="ingredient-piece"
-              data-x="-10"
-              data-y="10"
-              data-scale="0.75"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/60/Chicken_breast.png"
-              alt="닭가슴살"
-              loading="lazy"
-            />
-            <img
-              class="ingredient-piece"
-              data-x="40"
-              data-y="15"
-              data-scale="0.7"
-              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Carrot_Daucus_carota.jpg"
-              alt="당근"
-              loading="lazy"
-            />
-            <img
-              class="ingredient-piece"
-              data-x="-40"
-              data-y="20"
-              data-scale="0.65"
-              src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Red_onion_quarter_and_cross_section.jpg"
-              alt="적양파"
-              loading="lazy"
-            />
-          </div>
-          <div class="gather-text">
-            <h2>
-              저희 팀원 분들 제 얘기 잘 들어주시고 같이 해주셔서 감사해요!!
-              오늘도 화이팅입니당 ♥
-            </h2>
-            <p>
-              (공사중) 스크롤을 내리면 양상추, 토마토, 닭가슴살 등 신선한
-              재료들이 자연스럽게 <strong>그릇 안으로 모여</strong> 한 끼가
-              완성되는 과정을 인터랙티브하게 보여줄 공간
-            </p>
-            <ul class="gather-highlights">
-              <li>스크롤 진행도에 따라 위치/회전/스케일 변화</li>
-              <li>ScrollTrigger + GSAP 활용 퍼포먼스 최적화</li>
-              <li>모바일에서도 부드러운 하드웨어 가속</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section id="menu" class="menu-section">
-      <div class="container">
-        <!-- Compact Filter Bar -->
-        <div class="filters" role="toolbar" aria-label="메뉴 필터">
-          <div class="filters__search-wrap">
-            <input
-              type="search"
-              class="filters__search"
-              id="menuSearch"
-              placeholder="메뉴 검색..."
-              aria-label="메뉴 검색"
-              autocomplete="off"
-            />
-            <ul
-              class="filters__suggestions"
-              id="menuSuggestions"
-              role="listbox"
-              hidden
-            ></ul>
-          </div>
-          <div
-            class="filters__pills"
-            id="filterPills"
-            role="group"
-            aria-label="카테고리"
-          >
-            <button class="filters__pill" data-filter="" aria-pressed="true">
-              전체
-            </button>
-            <button
-              class="filters__pill"
-              data-filter="protein"
-              aria-pressed="false"
-            >
-              단백질
-            </button>
-            <button
-              class="filters__pill"
-              data-filter="vegetarian"
-              aria-pressed="false"
-            >
-              채식
-            </button>
-            <button
-              class="filters__pill"
-              data-filter="low-carb"
-              aria-pressed="false"
-            >
-              저탄수
-            </button>
-            <button
-              class="filters__pill"
-              data-filter="balanced"
-              aria-pressed="false"
-            >
-              균형
-            </button>
-            <button
-              class="filters__more"
-              type="button"
-              aria-expanded="false"
-              aria-controls="advFilters"
-            >
-              고급 필터
-            </button>
-          </div>
-          <!-- 간단한 칼로리/단백질 범위 슬라이더 -->
-          <div class="filters__ranges">
-            <div class="filters__range-group">
-              <label class="filters__range-label">칼로리 범위</label>
-              <div class="filters__range-inputs">
-                <input
-                  type="range"
-                  id="calorie-min"
-                  min="200"
-                  max="800"
-                  value="200"
-                  aria-label="최소 칼로리"
-                />
-                <input
-                  type="range"
-                  id="calorie-max"
-                  min="200"
-                  max="800"
-                  value="800"
-                  aria-label="최대 칼로리"
-                />
-              </div>
-              <div class="filters__range-display">
-                <span id="calorie-min-value">200</span> -
-                <span id="calorie-max-value">800</span> kcal
-              </div>
-            </div>
-            <div class="filters__range-group">
-              <label class="filters__range-label">단백질 범위</label>
-              <div class="filters__range-inputs">
-                <input
-                  type="range"
-                  id="protein-min"
-                  min="10"
-                  max="60"
-                  value="10"
-                  aria-label="최소 단백질"
-                />
-                <input
-                  type="range"
-                  id="protein-max"
-                  min="10"
-                  max="60"
-                  value="60"
-                  aria-label="최대 단백질"
-                />
-              </div>
-              <div class="filters__range-display">
-                <span id="protein-min-value">10</span> -
-                <span id="protein-max-value">60</span> g
-              </div>
-            </div>
-          </div>
-          <div class="filters__adv" id="advFilters" hidden>
-            <div class="filters__adv-grid">
-              <!-- 칼로리/단백질 필드는 인라인 슬라이더로 이동 -->
-              <div class="filters__field">
-                <label for="carbs-max" class="filters__label"
-                  >탄수 상한 (g)</label
-                >
-                <input
-                  type="number"
-                  id="carbs-max"
-                  min="0"
-                  max="120"
-                  value="120"
-                  class="filters__number"
-                />
-              </div>
-              <div class="filters__field">
-                <label for="fat-max" class="filters__label"
-                  >지방 상한 (g)</label
-                >
-                <input
-                  type="number"
-                  id="fat-max"
-                  min="0"
-                  max="60"
-                  value="60"
-                  class="filters__number"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Menu Grid -->
-        <div class="menu-grid" id="menu-grid">
-          <!-- Menu items will be dynamically loaded -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Custom Builder Section -->
-    <section id="builder" class="builder-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>커스텀 빌더</h2>
-          <p>서브웨이처럼 재료를 하나씩 선택하여 나만의 도시락을 만드세요</p>
-        </div>
-
-        <div class="builder-container">
-          <div class="builder-left">
-            <!-- Ingredient Categories -->
-            <div class="ingredient-categories">
-              <button class="category-btn active" data-category="base">
-                기본
-              </button>
-              <button class="category-btn" data-category="protein">
-                단백질
-              </button>
-              <button class="category-btn" data-category="vegetable">
-                채소
-              </button>
-              <button class="category-btn" data-category="carb">
-                탄수화물
-              </button>
-              <button class="category-btn" data-category="sauce">소스</button>
-            </div>
-
-            <!-- Ingredients Grid -->
-            <div class="ingredients-grid" id="ingredients-grid">
-              <!-- Ingredients will be loaded dynamically -->
-            </div>
-          </div>
-
-          <div class="builder-right">
-            <!-- Selected Ingredients -->
-            <div class="selected-ingredients glass-card">
-              <h3>선택된 재료</h3>
-              <div class="ingredients-list" id="selected-ingredients">
-                <p class="empty-state">재료를 선택해주세요</p>
-              </div>
-            </div>
-
-            <!-- Nutrition Summary -->
-            <div class="nutrition-summary glass-card">
-              <h3>영양 정보</h3>
-              <div class="nutrition-grid">
-                <div class="nutrition-item">
-                  <span class="label">칼로리</span>
-                  <span class="value" id="total-calories">0 kcal</span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento - 맞춤형 도시락</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="SlimBentoLogo.png" width="40" height="40" alt="Bento 로고">
+                    Bento
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">홈</a></li>
+                    <li><a href="#menu" class="nav-link">메뉴</a></li>
+                    <li><a href="#builder" class="nav-link">커스텀</a></li>
+                    <li><a href="cart.html" class="nav-link">🛒 장바구니 <span class="cart-count">0</span></a></li>
+                </ul>
+                <div class="user-menu">
+                    <a href="login.html" class="nav-link" id="login-link">로그인</a>
+                    <a href="mypage.html" class="nav-link" id="mypage-link" style="display: none;">마이페이지</a>
+                    <button id="logout-btn" class="logout-btn" style="display: none;">로그아웃</button>
                 </div>
-                <div class="nutrition-item">
-                  <span class="label">단백질</span>
-                  <span class="value" id="total-protein">0 g</span>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-                <div class="nutrition-item">
-                  <span class="label">탄수화물</span>
-                  <span class="value" id="total-carbs">0 g</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>맛있고 건강한 도시락</h1>
+                <p>나만의 특별한 도시락을 만들어보세요</p>
+                <div class="hero-buttons">
+                    <a href="#builder" class="btn btn-primary">도시락 만들기</a>
+                    <a href="#menu" class="btn btn-secondary">메뉴 보기</a>
                 </div>
-                <div class="nutrition-item">
-                  <span class="label">지방</span>
-                  <span class="value" id="total-fat">0 g</span>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="menu-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>인기 메뉴</h2>
+                    <p>엄선된 재료로 만든 건강한 도시락들을 만나보세요</p>
                 </div>
-              </div>
-              <div class="price-total">
-                <span class="label">총 가격</span>
-                <span class="value" id="total-price">0원</span>
-              </div>
-              <button class="btn btn-primary btn-full" id="add-to-cart">
-                장바구니 담기
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                
+                <div class="menu-filters">
+                    <button class="filter-btn active" data-filter="all">전체</button>
+                    <button class="filter-btn" data-filter="healthy">헬시</button>
+                    <button class="filter-btn" data-filter="protein">고단백</button>
+                    <button class="filter-btn" data-filter="diet">다이어트</button>
+                </div>
 
-    <!-- Subscription Planner -->
-    <section id="subscription" class="subscription-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>구독 플래너</h2>
-          <p>주간 식단을 미리 계획하고 정기배송을 받아보세요</p>
-        </div>
+                <div class="menu-grid" id="menu-items">
+                    <!-- 메뉴 아이템들이 동적으로 로드됩니다 -->
+                </div>
+            </div>
+        </section>
 
-        <div class="planner-container">
-          <div class="week-planner glass-card">
-            <div class="planner-header">
-              <h3>주간 식단표</h3>
-              <div class="week-navigation">
-                <button class="btn-icon" id="prev-week">‹</button>
-                <span id="current-week">2024년 1주차</span>
-                <button class="btn-icon" id="next-week">›</button>
-              </div>
-            </div>
-            <div class="week-grid" id="week-grid">
-              <!-- Weekly meal slots -->
-            </div>
-          </div>
+        <!-- Custom Builder Section -->
+        <section id="builder" class="builder-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>커스텀 빌더</h2>
+                    <p>원하는 재료를 선택하여 나만의 도시락을 만드세요</p>
+                </div>
 
-          <div class="subscription-options glass-card">
-            <h3>구독 옵션</h3>
-            <div class="option-group">
-              <label>배송 주기</label>
-              <select id="delivery-cycle">
-                <option value="weekly">매주</option>
-                <option value="biweekly">격주</option>
-                <option value="monthly">매월</option>
-              </select>
-            </div>
-            <div class="option-group">
-              <label>배송 시간</label>
-              <select id="delivery-time">
-                <option value="morning">오전 (9-12시)</option>
-                <option value="afternoon">오후 (1-6시)</option>
-                <option value="evening">저녁 (6-9시)</option>
-              </select>
-            </div>
-            <div class="subscription-summary">
-              <div class="summary-item">
-                <span>주간 도시락 수</span>
-                <span id="weekly-count">0개</span>
-              </div>
-              <div class="summary-item">
-                <span>주간 예상 비용</span>
-                <span id="weekly-cost">0원</span>
-              </div>
-            </div>
-            <button class="btn btn-primary btn-full" id="start-subscription">
-              구독 시작하기
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+                <div class="builder-container">
+                    <div class="builder-left">
+                        <!-- 재료 카테고리 -->
+                        <div class="ingredient-categories">
+                            <button class="category-btn active" data-category="base">기본</button>
+                            <button class="category-btn" data-category="protein">단백질</button>
+                            <button class="category-btn" data-category="vegetable">채소</button>
+                            <button class="category-btn" data-category="carb">탄수화물</button>
+                            <button class="category-btn" data-category="sauce">소스</button>
+                        </div>
 
-    <!-- Nutrition Calculator -->
-    <section id="nutrition" class="nutrition-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>영양 계산기</h2>
-          <p>BMR/TDEE를 계산하고 맞춤 매크로 영양소를 확인하세요</p>
-        </div>
+                        <!-- 재료 그리드 -->
+                        <div class="ingredients-grid" id="ingredients-grid">
+                            <!-- 재료들이 동적으로 로드됩니다 -->
+                        </div>
+                    </div>
 
-        <div class="calculator-container">
-          <div class="calculator-form glass-card">
-            <h3>기본 정보 입력</h3>
-            <div class="form-group">
-              <label>성별</label>
-              <div class="radio-group">
-                <label
-                  ><input type="radio" name="gender" value="male" /> 남성</label
-                >
-                <label
-                  ><input type="radio" name="gender" value="female" />
-                  여성</label
-                >
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>나이</label>
-                <input type="number" id="age" placeholder="만 나이" />
-              </div>
-              <div class="form-group">
-                <label>키 (cm)</label>
-                <input type="number" id="height" placeholder="키" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>체중 (kg)</label>
-                <input type="number" id="weight" placeholder="현재 체중" />
-              </div>
-              <div class="form-group">
-                <label>목표 체중 (kg)</label>
-                <input
-                  type="number"
-                  id="target-weight"
-                  placeholder="목표 체중"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>활동 수준</label>
-              <select id="activity-level">
-                <option value="1.2">거의 운동하지 않음</option>
-                <option value="1.375">가벼운 운동 (주 1-3회)</option>
-                <option value="1.55">보통 운동 (주 3-5회)</option>
-                <option value="1.725">활발한 운동 (주 6-7회)</option>
-                <option value="1.9">매우 활발한 운동</option>
-              </select>
-            </div>
-            <button class="btn btn-primary btn-full" id="calculate-nutrition">
-              계산하기
-            </button>
-          </div>
+                    <div class="builder-right">
+                        <!-- 선택된 재료 -->
+                        <div class="selected-ingredients">
+                            <h3>선택된 재료</h3>
+                            <div class="ingredients-list" id="selected-ingredients">
+                                <p class="empty-state">재료를 선택해주세요</p>
+                            </div>
+                        </div>
 
-          <div class="calculation-results glass-card">
-            <h3>계산 결과</h3>
-            <div class="results-grid" id="nutrition-results">
-              <div class="result-item">
-                <span class="label">BMR (기초대사율)</span>
-                <span class="value" id="bmr-result">-</span>
-              </div>
-              <div class="result-item">
-                <span class="label">TDEE (일일 소모 칼로리)</span>
-                <span class="value" id="tdee-result">-</span>
-              </div>
-              <div class="result-item">
-                <span class="label">권장 칼로리 (다이어트)</span>
-                <span class="value" id="diet-calories">-</span>
-              </div>
-              <div class="result-item">
-                <span class="label">권장 단백질</span>
-                <span class="value" id="recommended-protein">-</span>
-              </div>
-              <div class="result-item">
-                <span class="label">권장 탄수화물</span>
-                <span class="value" id="recommended-carbs">-</span>
-              </div>
-              <div class="result-item">
-                <span class="label">권장 지방</span>
-                <span class="value" id="recommended-fat">-</span>
-              </div>
+                        <!-- 영양 정보 -->
+                        <div class="nutrition-summary">
+                            <h3>영양 정보</h3>
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <span class="label">칼로리</span>
+                                    <span class="value" id="total-calories">0 kcal</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">단백질</span>
+                                    <span class="value" id="total-protein">0 g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">탄수화물</span>
+                                    <span class="value" id="total-carbs">0 g</span>
+                                </div>
+                                <div class="nutrition-item">
+                                    <span class="label">지방</span>
+                                    <span class="value" id="total-fat">0 g</span>
+                                </div>
+                            </div>
+                            <div class="price-total">
+                                <span class="label">총 가격</span>
+                                <span class="value" id="total-price">0원</span>
+                            </div>
+                            <button class="btn btn-primary btn-full" id="add-to-cart">
+                                장바구니 담기
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <h3>LeanBento</h3>
-            <p>
-              맞춤형 다이어트 도시락으로<br />건강한 라이프스타일을 만들어보세요
-            </p>
-            <ul class="social-links" aria-label="소셜 링크">
-              <li>
-                <a
-                  href="https://pf.kakao.com"
-                  aria-label="카카오톡"
-                  target="_blank"
-                  rel="noopener"
-                  ><i class="ri-kakao-talk-fill" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a
-                  href="https://instagram.com"
-                  aria-label="인스타그램"
-                  target="_blank"
-                  rel="noopener"
-                  ><i class="ri-instagram-line" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a
-                  href="https://youtube.com"
-                  aria-label="유튜브"
-                  target="_blank"
-                  rel="noopener"
-                  ><i class="ri-youtube-fill" aria-hidden="true"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <div class="link-group">
-              <h4>서비스</h4>
-              <a href="#menu">메뉴</a>
-              <a href="#builder">커스텀 빌더</a>
-              <a href="#subscription">구독 서비스</a>
-              <a href="#nutrition">영양 계산기</a>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>Bento</h3>
+                        <p>건강한 도시락, 맞춤 주문</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#home">홈</a>
+                        <a href="#menu">메뉴</a>
+                        <a href="#builder">커스텀</a>
+                        <a href="cart.html">장바구니</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Bento. All rights reserved.</p>
+                </div>
             </div>
-            <div class="link-group">
-              <h4>고객지원</h4>
-              <a href="#faq">자주 묻는 질문</a>
-              <a href="#contact">문의하기</a>
-              <a href="#terms">이용약관</a>
-              <a href="#privacy">개인정보처리방침</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2024 LeanBento. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+        </footer>
+    </main>
 
-    <!-- Modals -->
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-      <div class="modal-content glass-card">
-        <div class="modal-header">
-          <h3>로그인</h3>
-          <button class="modal-close" data-modal="login-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form id="login-form">
-            <div class="form-group">
-              <label>이메일</label>
-              <input type="email" id="login-email" required />
-            </div>
-            <div class="form-group">
-              <label>비밀번호</label>
-              <input type="password" id="login-password" required />
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">
-              로그인
-            </button>
-          </form>
-          <div class="modal-footer">
-            <p>
-              계정이 없으신가요? <a href="#" id="show-register">회원가입</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div class="modal" id="register-modal">
-      <div class="modal-content glass-card">
-        <div class="modal-header">
-          <h3>회원가입</h3>
-          <button class="modal-close" data-modal="register-modal">
-            &times;
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="register-form">
-            <div class="form-group">
-              <label>이름</label>
-              <input type="text" id="register-name" required />
-            </div>
-            <div class="form-group">
-              <label>이메일</label>
-              <input type="email" id="register-email" required />
-            </div>
-            <div class="form-group">
-              <label>비밀번호</label>
-              <input type="password" id="register-password" required />
-            </div>
-            <div class="form-group">
-              <label>비밀번호 확인</label>
-              <input type="password" id="register-password-confirm" required />
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">
-              회원가입
-            </button>
-          </form>
-          <div class="modal-footer">
-            <p>
-              이미 계정이 있으신가요? <a href="#" id="show-login">로그인</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cart Modal -->
-    <div class="modal" id="cart-modal">
-      <div class="modal-content glass-card">
-        <div class="modal-header">
-          <h3>장바구니</h3>
-          <button class="modal-close" data-modal="cart-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="cart-items" id="cart-items">
-            <!-- Cart items will be displayed here -->
-          </div>
-          <div class="cart-summary">
-            <div class="summary-row">
-              <span>총 상품금액</span>
-              <span id="cart-subtotal">0원</span>
-            </div>
-            <div class="summary-row">
-              <span>배송비</span>
-              <span id="cart-delivery">3,000원</span>
-            </div>
-            <div class="summary-row total">
-              <span>총 결제금액</span>
-              <span id="cart-total">0원</span>
-            </div>
-          </div>
-          <button class="btn btn-primary btn-full" id="checkout">
-            주문하기
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Accessibility & minimal interaction script (non-module) -->
-    <script>
-      // GNB active detection by hash / path
-      function setActiveLink() {
-        const hash = location.hash || "#home";
-        document.querySelectorAll(".gnb__link").forEach((a) => {
-          const section = a.getAttribute("href");
-          if (section === hash) {
-            a.classList.add("is-active");
-            a.setAttribute("aria-current", "page");
-          } else {
-            a.classList.remove("is-active");
-            a.removeAttribute("aria-current");
-          }
-        });
-      }
-      window.addEventListener("hashchange", setActiveLink);
-      setActiveLink();
-
-      // Profile dropdown
-      const profileBtn = document.querySelector(".profile__btn");
-      const profileMenu = document.getElementById("profileMenu");
-      function closeMenu() {
-        if (!profileMenu) return;
-        profileMenu.dataset.open = "false";
-        profileMenu.hidden = true;
-        profileBtn?.setAttribute("aria-expanded", "false");
-      }
-      function openMenu() {
-        if (!profileMenu) return;
-        profileMenu.dataset.open = "true";
-        profileMenu.hidden = false;
-        profileBtn?.setAttribute("aria-expanded", "true");
-      }
-      profileBtn?.addEventListener("click", (e) => {
-        const open = profileMenu?.dataset.open === "true";
-        open ? closeMenu() : openMenu();
-      });
-      document.addEventListener("click", (e) => {
-        if (!profileMenu) return;
-        if (!profileMenu.contains(e.target) && !profileBtn.contains(e.target))
-          closeMenu();
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeMenu();
-      });
-
-      // Filter pill toggle (menu filtering now handled in main.js)
-      document.querySelectorAll(".filters__pill").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const already = btn.getAttribute("aria-pressed") === "true";
-          document
-            .querySelectorAll(".filters__pill")
-            .forEach((p) => p.setAttribute("aria-pressed", "false"));
-          btn.setAttribute("aria-pressed", String(!already));
-        });
-      });
-
-      // Advanced filters disclosure
-      const moreBtn = document.querySelector(".filters__more");
-      const adv = document.getElementById("advFilters");
-      moreBtn?.addEventListener("click", () => {
-        const expanded = moreBtn.getAttribute("aria-expanded") === "true";
-        moreBtn.setAttribute("aria-expanded", String(!expanded));
-        adv.hidden = expanded;
-      });
-
-      // Reduced motion preference
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.documentElement.style.setProperty("scroll-behavior", "auto");
-      }
-
-      // LNB panel script
-      (function () {
-        const gnb = document.getElementById("site-gnb");
-        const panel = document.getElementById("lnbPanel");
-        if (!gnb || !panel) return;
-        let hideTimer;
-        const open = () => {
-          clearTimeout(hideTimer);
-          if (!gnb.classList.contains("lnb-open")) {
-            gnb.classList.add("lnb-open");
-            panel.hidden = false;
-          }
-        };
-        const close = () => {
-          hideTimer = setTimeout(() => {
-            gnb.classList.remove("lnb-open");
-            panel.hidden = true;
-          }, 140);
-        };
-        gnb.addEventListener("mouseenter", open);
-        gnb.addEventListener("mouseleave", close);
-        // Keyboard focus accessibility
-        gnb.addEventListener("focusin", open);
-        gnb.addEventListener("focusout", (e) => {
-          if (!gnb.contains(e.relatedTarget)) close();
-        });
-        // Escape key closes
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") close();
-        });
-      })();
-    </script>
-    <!-- ...existing module scripts remain below -->
-    <script type="module" src="./assets/js/data.js"></script>
-    <script type="module" src="./assets/js/main.js"></script>
-    <script type="module" src="./assets/js/theme.js"></script>
-    <script type="module" src="./assets/js/nutrition.js"></script>
-    <script type="module" src="./assets/js/builder.js"></script>
-    <script type="module" src="./assets/js/subscription.js"></script>
-    <script type="module" src="./assets/js/cart.js"></script>
-  </body>
+    <!-- JavaScript -->
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/builder.js"></script>
+</body>
 </html>
